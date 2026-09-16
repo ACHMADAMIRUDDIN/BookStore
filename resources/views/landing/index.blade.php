@@ -63,6 +63,7 @@
         </div>
     </header>
 
+
     <main>
         @include('landing.section.hero')
         @include('landing.section.buku')
@@ -70,7 +71,7 @@
         @include('landing.section.kontak')
     </main>
 
-    <!-- Footer -->
+  
     <footer class="border-t border-[#ECE4D8] bg-[#FAF7F2] py-12">
         <div class="mx-auto max-w-7xl px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6 text-xs text-[#8C7667]">
             <div class="flex items-center gap-3">
@@ -87,6 +88,7 @@
             </div>
         </div>
     </footer>
+
 
 </body>
 
