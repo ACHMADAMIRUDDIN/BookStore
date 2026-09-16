@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateBookRequest;
 use App\Models\Book;
 use App\Models\Category;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class BookController extends Controller
@@ -32,9 +33,15 @@ class BookController extends Controller
 
     public function store(StoreBookRequest $request): RedirectResponse
     {
-        Book::create($request->validated());
-        
+        $data = $request->validated();
 
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')
+                ->store('book_images', 'public');
+        }
+
+        Book::create($data);
+        
         return redirect()
             ->route('books.index')
             ->with('success', 'Buku berhasil ditambahkan.');
@@ -51,7 +58,18 @@ class BookController extends Controller
 
     public function update(UpdateBookRequest $request, Book $book)
     {
-        $book->update($request->validated());
+        $data = $request->validated();
+
+        if ($request->hasFile('image')) {
+            if ($book->image) {
+                Storage::disk('public')->delete($book->image);
+            }
+
+            $data['image'] = $request->file('image')
+                ->store('book_images', 'public');
+        }
+
+        $book->update($data);
 
         return redirect()
             ->route('books.index')
@@ -60,6 +78,11 @@ class BookController extends Controller
 
     public function destroy(Book $book): RedirectResponse
     {
+        
+        if ($book->image) {
+            Storage::disk('public')->delete($book->image);
+        }
+
         $book->delete();
 
         return redirect()->route('books.index')->with('success', 'Buku berhasil dihapus.');
