@@ -20,6 +20,8 @@
         <nav class="ml-4 flex min-w-0 flex-1 items-center justify-end gap-4 overflow-x-auto whitespace-nowrap md:flex-none md:gap-7">
             <a href="#hero" class="text-sm font-medium text-gray-700 transition hover:text-orange-500">Beranda</a>
             <a href="#buku" class="text-sm font-medium text-gray-700 transition hover:text-orange-500">Katalog</a>
+            <a href="#aboutus" class="text-sm font-medium text-gray-700 transition hover:text-orange-500">Tentang Kami</a>
+            <a href="#kontak" class="text-sm font-medium text-gray-700 transition hover:text-orange-500">Kontak</a>
         </nav>
         <div class="hidden items-center gap-3 md:flex">
             <a href="{{ route('login') }}" class="rounded-xl px-5 py-2.5 text-sm font-semibold text-gray-700 transition hover:bg-gray-100">Masuk</a>
@@ -29,6 +31,8 @@
 
     @include('landing.section.hero')
     @include('landing.section.buku')
+    @include('landing.section.aboutus')
+    @include('landing.section.contact')
     
 </body>
 
