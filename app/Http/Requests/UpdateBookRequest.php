@@ -64,6 +64,13 @@ class UpdateBookRequest extends FormRequest
                 'nullable',
                 'string',
             ],
+
+            'image' => [
+                'nullable',
+                'image',
+                'mimes:jpg,jpeg,png,webp',
+                'max:2048',
+            ],
         ];
     }
 }
