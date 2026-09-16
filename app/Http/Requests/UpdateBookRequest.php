@@ -26,7 +26,7 @@ class UpdateBookRequest extends FormRequest
             'category_id' => [
                 'required',
                 'integer',
-                'exists:category_book,id',
+                'exists:category,id',
             ],
 
             'title' => [
