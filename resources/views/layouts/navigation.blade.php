@@ -28,6 +28,12 @@
                         {{ __('Kategori') }}
                     </x-nav-link>
 
+                    @if(Auth::user()->isAdmin())
+                        <x-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.*')">
+                            {{ __('User') }}
+                        </x-nav-link>
+                    @endif
+
                 </div>
             </div>
 
