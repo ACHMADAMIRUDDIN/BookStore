@@ -41,7 +41,7 @@ class UpdateBookRequest extends FormRequest
                 'max:255',
             ],
 
-            'publication_year' => [
+            'published_year' => [
                 'required',
                 'integer',
                 'min:1000',
