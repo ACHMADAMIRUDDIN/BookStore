@@ -22,19 +22,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/admin/dashboard', function () {
-        return view('dashboard');
-    })->name('admin.index');
 
-    Route::resource('categories', CategoryController::class);
-    Route::resource('books', BookController::class);
-});
+Route::resource('categories', CategoryController::class)->middleware('auth');
+Route::resource('books', BookController::class)->middleware('auth');
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/user/dashboard', function () {
-        return view('user.index');
-    })->name('user.index');
-});
 
 require __DIR__.'/auth.php';

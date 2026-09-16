@@ -27,7 +27,7 @@ class StoreCategoryBookRequest extends FormRequest
                 'required',
                 'string',
                 'max:255',
-                'unique:category_book,name',
+                'unique:category,name'
             ],
         ];
     }
