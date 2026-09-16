@@ -32,7 +32,7 @@
     @include('landing.section.hero')
     @include('landing.section.buku')
     @include('landing.section.aboutus')
-    @include('landing.section.contact')
+    @include('landing.section.kontak')
     
 </body>
 
