@@ -7,7 +7,6 @@
     <title>Keranjang Belanja - BookStore</title>
     <meta name="description" content="Keranjang belanja buku BookStore.">
     
-    <!-- Google Fonts: Plus Jakarta Sans & Playfair Display -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -25,13 +24,11 @@
 </head>
 
 <body class="bg-[#FAF7F2] text-[#2C2420] antialiased min-h-screen flex flex-col justify-between selection:bg-[#EADBCC] selection:text-[#382317]">
-
-    <!-- Header / Navbar -->
     <header class="sticky top-0 z-40 bg-[#FAF7F2]/90 backdrop-blur-md border-b border-[#ECE4D8]">
         <div class="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-8">
             <a href="{{ route('user.index') }}" class="flex items-center gap-3 group">
-                <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-[#382317] text-amber-100 text-xl font-serif-title font-bold shadow-xs transition group-hover:bg-[#4E3120]">
-                    B
+                <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-[#382317] p-1.5 shadow-xs transition group-hover:bg-[#4E3120] overflow-hidden">
+                    <img src="{{ asset('images/logo.png') }}"alt="Logo BookStore"class="w-full h-full object-contain">
                 </div>
                 <div class="flex flex-col">
                     <span class="text-xl font-bold tracking-tight text-[#382317] leading-none">BookStore</span>
@@ -61,8 +58,6 @@
 
     <main class="flex-1 py-10">
         <div class="mx-auto max-w-6xl px-6 lg:px-8">
-
-            <!-- Notifikasi Sukses -->
             @if (session('success'))
                 <div class="mb-8 rounded-2xl bg-[#F0F7F2] border border-[#C6E6D0] p-4 text-sm font-medium text-[#1E5631] flex items-center gap-3 shadow-2xs">
                     <div class="w-7 h-7 rounded-full bg-[#D4EEDC] flex items-center justify-center shrink-0">
@@ -73,8 +68,6 @@
                     <span>{{ session('success') }}</span>
                 </div>
             @endif
-
-            <!-- Notifikasi Error / Peringatan -->
             @if (session('error'))
                 <div class="mb-8 rounded-2xl bg-red-50 border border-red-200 p-4 text-sm font-medium text-red-800 flex items-center gap-3 shadow-2xs">
                     <div class="w-7 h-7 rounded-full bg-red-100 flex items-center justify-center shrink-0">
@@ -99,8 +92,6 @@
 
             @if ($carts->isNotEmpty())
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                    
-                    <!-- Daftar Buku di Keranjang -->
                     <div class="lg:col-span-8 space-y-4">
                         @php $grandTotal = 0; @endphp
                         @foreach ($carts as $cart)
@@ -112,8 +103,6 @@
                             @endphp
 
                             <div class="bg-white rounded-2xl border border-[#EADBCC] p-5 shadow-[0_2px_10px_-4px_rgba(43,27,18,0.04)] flex flex-col sm:flex-row gap-5 items-start sm:items-center justify-between transition hover:border-[#D6C4B0]">
-                                
-                                <!-- Info Buku -->
                                 <div class="flex items-center gap-4 flex-1">
                                     <a href="{{ route('user.books.detail', $book) }}" class="relative h-24 w-18 shrink-0 overflow-hidden rounded-xl bg-[#F4EFEA] border border-[#ECE4D8] aspect-[3/4]">
                                         @if ($coverImg)
@@ -124,7 +113,6 @@
                                             </div>
                                         @endif
                                     </a>
-
                                     <div class="min-w-0 flex-1">
                                         <span class="text-[10px] font-bold uppercase tracking-wider text-[#B85D19]">
                                             {{ $book->category->name ?? 'Umum' }}
@@ -140,14 +128,8 @@
                                         </p>
                                     </div>
                                 </div>
-
-                                <!-- Pengatur Kuantitas & Tombol Hapus / Kurang -->
                                 <div class="flex items-center justify-between sm:justify-end gap-6 w-full sm:w-auto pt-3 sm:pt-0 border-t sm:border-t-0 border-[#F2ECE4]">
-                                    
-                                    <!-- Stepper Tambah / Kurang (Misal 2 jadi 1) -->
                                     <div class="flex items-center border border-[#E2D8CA] rounded-xl bg-[#FAF7F2] p-1 shadow-2xs">
-                                        
-                                        <!-- Tombol Kurang (Jika > 1 jadi berkurang 1, jika 1 terhapus) -->
                                         <form action="{{ route('user.keranjang.kurang', $cart) }}" method="POST" class="inline">
                                             @csrf
                                             @method('PATCH')
@@ -157,13 +139,10 @@
                                                 -
                                             </button>
                                         </form>
-
-                                        <!-- Jumlah Saat Ini -->
                                         <span class="w-10 text-center text-xs font-bold text-[#382317]">
                                             {{ $cart->quantity }}
                                         </span>
 
-                                        <!-- Tombol Tambah (Menambah 1 buku lagi) -->
                                         <form action="{{ route('user.keranjang.tambah', $cart) }}" method="POST" class="inline">
                                             @csrf
                                             @method('PATCH')
@@ -174,8 +153,6 @@
                                             </button>
                                         </form>
                                     </div>
-
-                                    <!-- Subtotal & Hapus Seluruh Item -->
                                     <div class="text-right flex items-center gap-3">
                                         <div>
                                             <span class="text-[10px] text-[#8C7667] block uppercase tracking-wider">Subtotal</span>
@@ -183,8 +160,6 @@
                                                 Rp {{ number_format($subtotal, 0, ',', '.') }}
                                             </span>
                                         </div>
-
-                                        <!-- Tombol Hapus Langsung Seluruh Item -->
                                         <form action="{{ route('user.keranjang.destroy', $cart) }}" method="POST" class="inline" onsubmit="return confirm('Hapus {{ $book->title }} dari keranjang?')">
                                             @csrf
                                             @method('DELETE')
@@ -197,14 +172,11 @@
                                             </button>
                                         </form>
                                     </div>
-
                                 </div>
-
                             </div>
                         @endforeach
                     </div>
 
-                    <!-- Ringkasan Pesanan (Sidebar) -->
                     <div class="lg:col-span-4">
                         <div class="rounded-2xl bg-white border border-[#EADBCC] p-6 shadow-sm sticky top-28 space-y-5">
                             <h2 class="text-lg font-bold font-serif-title text-[#382317] border-b border-[#F2ECE4] pb-3">

@@ -29,8 +29,8 @@
     <header class="sticky top-0 z-40 bg-[#FAF7F2]/90 backdrop-blur-md border-b border-[#ECE4D8] transition-all">
         <div class="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-8">
             <a href="{{ route('user.index') }}" class="flex items-center gap-3 group">
-                <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-[#382317] text-amber-100 text-xl font-serif-title font-bold shadow-xs transition group-hover:bg-[#4E3120]">
-                    B
+                <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-[#382317] p-1.5 shadow-xs transition group-hover:bg-[#4E3120] overflow-hidden">
+                    <img src="{{ asset('images/logo.png') }}"alt="Logo BookStore"class="w-full h-full object-contain">
                 </div>
                 <div class="flex flex-col">
                     <span class="text-xl font-bold tracking-tight text-[#382317] leading-none">BookStore</span>

@@ -10,11 +10,12 @@
 </head>
 
 <body class="bg-[#f7f1e8] font-sans text-gray-900 antialiased min-h-screen flex flex-col justify-between">
-    <!-- Header -->
     <header class="fixed inset-x-0 top-0 z-50 border-b border-gray-100 bg-white/95 backdrop-blur">
         <div class="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-8">
             <a href="{{ route('user.index') }}" class="flex items-center gap-3">
-                <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-950 text-lg font-bold text-amber-100">B</span>
+                <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-[#382317] p-1.5 shadow-xs transition group-hover:bg-[#4E3120] overflow-hidden">
+                    <img src="{{ asset('images/logo.png') }}"alt="Logo BookStore"class="w-full h-full object-contain">
+                </div>
                 <span class="text-lg font-bold leading-none text-[#4A2E1B]">BookStore</span>
             </a>
             <nav class="ml-4 flex min-w-0 flex-1 items-center justify-end gap-4 overflow-x-auto whitespace-nowrap md:flex-none md:gap-7">
@@ -36,8 +37,6 @@
             </nav>
         </div>
     </header>
-
-    <!-- Main Content -->
     <main class="pt-28 pb-16 flex-1 px-4 sm:px-6 lg:px-8">
         <div class="mx-auto max-w-6xl">
             <!-- Breadcrumbs -->
@@ -48,8 +47,6 @@
                 <span>/</span>
                 <span class="font-medium text-[#4A2E1B] truncate max-w-xs sm:max-w-md">{{ $book->title }}</span>
             </nav>
-
-            <!-- Success Flash Notification -->
             @if (session('success'))
                 <div class="mb-6 rounded-2xl bg-emerald-50 border border-emerald-200 p-4 text-sm font-medium text-emerald-800 flex items-center justify-between">
                     <div class="flex items-center gap-3">
@@ -65,7 +62,6 @@
             @endif
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-                <!-- Kolom Kiri: Cover Gambar -->
                 <div class="lg:col-span-5">
                     <div class="rounded-3xl bg-white p-4 shadow-sm ring-1 ring-[#4A2E1B]/10 sticky top-28">
                         <div class="relative aspect-[3/4] w-full overflow-hidden rounded-2xl bg-gray-100 shadow-inner">
@@ -87,15 +83,12 @@
                                 </div>
                             @endif
 
-                            <!-- Kategori Tag -->
                             <span class="absolute top-4 left-4 bg-amber-100 text-amber-900 text-xs font-bold px-3 py-1.5 rounded-lg shadow-xs">
                                 {{ $book->category->name ?? 'Umum' }}
                             </span>
                         </div>
                     </div>
                 </div>
-
-                <!-- Kolom Kanan: Detail Informasi Buku -->
                 <div class="lg:col-span-7 space-y-6">
                     <!-- Judul & Penulis -->
                     <div>
@@ -109,8 +102,6 @@
                             Penulis: <span class="font-semibold text-[#4A2E1B]">{{ $book->author }}</span>
                         </p>
                     </div>
-
-                    <!-- Harga & Status Stok -->
                     <div class="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-[#4A2E1B]/10 flex flex-wrap items-center justify-between gap-4">
                         <div>
                             <span class="text-xs text-gray-400 block mb-1">Harga Buku</span>
@@ -133,8 +124,6 @@
                             @endif
                         </div>
                     </div>
-
-                    <!-- Indikator Jika Sudah Ada di Keranjang -->
                     @if (!empty($cartItem))
                         <div class="rounded-2xl bg-amber-50/80 border border-amber-200/80 p-4 flex items-center justify-between text-sm text-[#4A2E1B]">
                             <div class="flex items-center gap-2">
@@ -148,8 +137,6 @@
                             </a>
                         </div>
                     @endif
-
-                    <!-- Form Tambah ke Keranjang -->
                     @if ($book->stock > 0)
                         <form action="{{ route('user.keranjang.store') }}" method="POST" class="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-[#4A2E1B]/10 space-y-4">
                             @csrf
@@ -174,8 +161,6 @@
                                         +
                                     </button>
                                 </div>
-
-                                <!-- Tombol Submit -->
                                 <button type="submit" 
                                     class="flex-1 flex items-center justify-center gap-2 py-3 px-6 rounded-xl bg-amber-950 text-white font-bold hover:bg-amber-800 transition active:scale-95 shadow-md">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -186,8 +171,6 @@
                             </div>
                         </form>
                     @endif
-
-                    <!-- Detail Spesifikasi Buku -->
                     <div class="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-[#4A2E1B]/10 space-y-4">
                         <h2 class="text-lg font-bold text-[#4A2E1B] border-b border-gray-100 pb-3">Informasi Buku</h2>
                         <dl class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3 text-sm">
@@ -218,15 +201,12 @@
                         </dl>
                     </div>
 
-                    <!-- Deskripsi Buku -->
                     <div class="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-[#4A2E1B]/10 space-y-3">
                         <h2 class="text-lg font-bold text-[#4A2E1B]">Deskripsi Buku</h2>
                         <div class="text-sm text-[#745b48] leading-relaxed whitespace-pre-line">
                             {{ $book->description ?: 'Belum ada deskripsi untuk buku ini.' }}
                         </div>
                     </div>
-
-                    <!-- Tombol Kembali -->
                     <div>
                         <a href="{{ route('user.index') }}" class="inline-flex items-center gap-2 text-sm font-semibold text-amber-900 hover:text-amber-700 transition">
                             &larr; Kembali ke Katalog Buku
