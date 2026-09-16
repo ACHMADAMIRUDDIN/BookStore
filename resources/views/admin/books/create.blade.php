@@ -22,7 +22,8 @@
                     </h3>
                 </div>
 
-                <form action="{{ route('books.store') }}" method="POST">
+                <form action="{{ route('books.store') }}" method="POST"
+                    enctype="multipart/form-data">
                     @csrf
 
                     <div class="space-y-6 p-6">
@@ -33,14 +34,9 @@
                                 Judul Buku
                             </label>
 
-                            <input
-                                type="text"
-                                name="title"
-                                id="title"
-                                value="{{ old('title') }}"
+                            <input type="text" name="title" id="title" value="{{ old('title') }}"
                                 placeholder="Masukkan judul buku"
-                                class="mt-2 block w-full rounded-lg border-gray-300 shadow-sm focus:border-gray-800 focus:ring-gray-800"
-                            >
+                                class="mt-2 block w-full rounded-lg border-gray-300 shadow-sm focus:border-gray-800 focus:ring-gray-800">
 
                             @error('title')
                                 <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
@@ -53,14 +49,9 @@
                                 Penulis
                             </label>
 
-                            <input
-                                type="text"
-                                name="author"
-                                id="author"
-                                value="{{ old('author') }}"
+                            <input type="text" name="author" id="author" value="{{ old('author') }}"
                                 placeholder="Masukkan nama penulis"
-                                class="mt-2 block w-full rounded-lg border-gray-300 shadow-sm focus:border-gray-800 focus:ring-gray-800"
-                            >
+                                class="mt-2 block w-full rounded-lg border-gray-300 shadow-sm focus:border-gray-800 focus:ring-gray-800">
 
                             @error('author')
                                 <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
@@ -73,18 +64,13 @@
                                 Kategori
                             </label>
 
-                            <select
-                                name="category_id"
-                                id="category_id"
-                                class="mt-2 block w-full rounded-lg border-gray-300 shadow-sm focus:border-gray-800 focus:ring-gray-800"
-                            >
+                            <select name="category_id" id="category_id"
+                                class="mt-2 block w-full rounded-lg border-gray-300 shadow-sm focus:border-gray-800 focus:ring-gray-800">
                                 <option value="">Pilih kategori</option>
 
                                 @foreach ($categories as $category)
-                                    <option
-                                        value="{{ $category->id }}"
-                                        {{ old('category_id') == $category->id ? 'selected' : '' }}
-                                    >
+                                    <option value="{{ $category->id }}"
+                                        {{ old('category_id') == $category->id ? 'selected' : '' }}>
                                         {{ $category->name }}
                                     </option>
                                 @endforeach
@@ -101,14 +87,9 @@
                                 Tahun Terbit
                             </label>
 
-                            <input
-                                type="number"
-                                name="published_year"
-                                id="published_year"
-                                value="{{ old('published_year') }}"
-                                placeholder="Contoh: 2024"
-                                class="mt-2 block w-full rounded-lg border-gray-300 shadow-sm focus:border-gray-800 focus:ring-gray-800"
-                            >
+                            <input type="number" name="published_year" id="published_year"
+                                value="{{ old('published_year') }}" placeholder="Contoh: 2024"
+                                class="mt-2 block w-full rounded-lg border-gray-300 shadow-sm focus:border-gray-800 focus:ring-gray-800">
 
                             @error('published_year')
                                 <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
@@ -121,16 +102,9 @@
                                 Harga
                             </label>
 
-                            <input
-                                type="number"
-                                name="price"
-                                id="price"
-                                value="{{ old('price') }}"
-                                placeholder="Contoh: 75000"
-                                min="0"
-                                step="0.01"
-                                class="mt-2 block w-full rounded-lg border-gray-300 shadow-sm focus:border-gray-800 focus:ring-gray-800"
-                            >
+                            <input type="number" name="price" id="price" value="{{ old('price') }}"
+                                placeholder="Contoh: 75000" min="0" step="0.01"
+                                class="mt-2 block w-full rounded-lg border-gray-300 shadow-sm focus:border-gray-800 focus:ring-gray-800">
 
                             @error('price')
                                 <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
@@ -143,15 +117,9 @@
                                 Stok
                             </label>
 
-                            <input
-                                type="number"
-                                name="stock"
-                                id="stock"
-                                value="{{ old('stock') }}"
-                                placeholder="Contoh: 20"
-                                min="0"
-                                class="mt-2 block w-full rounded-lg border-gray-300 shadow-sm focus:border-gray-800 focus:ring-gray-800"
-                            >
+                            <input type="number" name="stock" id="stock" value="{{ old('stock') }}"
+                                placeholder="Contoh: 20" min="0"
+                                class="mt-2 block w-full rounded-lg border-gray-300 shadow-sm focus:border-gray-800 focus:ring-gray-800">
 
                             @error('stock')
                                 <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
@@ -164,13 +132,8 @@
                                 Deskripsi
                             </label>
 
-                            <textarea
-                                name="description"
-                                id="description"
-                                rows="5"
-                                placeholder="Masukkan deskripsi buku"
-                                class="mt-2 block w-full rounded-lg border-gray-300 shadow-sm focus:border-gray-800 focus:ring-gray-800"
-                            >{{ old('description') }}</textarea>
+                            <textarea name="description" id="description" rows="5" placeholder="Masukkan deskripsi buku"
+                                class="mt-2 block w-full rounded-lg border-gray-300 shadow-sm focus:border-gray-800 focus:ring-gray-800">{{ old('description') }}</textarea>
 
                             @error('description')
                                 <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
@@ -179,15 +142,31 @@
 
                     </div>
 
+                    {{-- Gambar Buku --}}
+                    <div>
+                        <label for="image" class="block text-sm font-medium text-gray-700">
+                            Gambar Buku
+                        </label>
+
+                        <input type="file" name="image" id="image" accept="image/*"
+                            class="mt-2 block w-full rounded-lg border border-gray-300 bg-white text-sm text-gray-700
+               file:mr-4 file:border-0 file:bg-gray-100 file:px-4 file:py-2
+               file:text-sm file:font-semibold file:text-gray-700
+               hover:file:bg-gray-200">
+
+                        @error('image')
+                            <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
+                    </div>
+
                     <div class="flex items-center justify-end gap-3 border-t border-gray-200 bg-gray-50 px-6 py-4">
 
                         <a href="{{ route('books.index') }}"
-                           class="rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-100">
+                            class="rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-100">
                             Batal
                         </a>
 
-                        <button
-                            type="submit"
+                        <button type="submit"
                             class="rounded-lg bg-gray-800 px-4 py-2 text-sm font-semibold text-white hover:bg-gray-700">
                             Simpan Buku
                         </button>

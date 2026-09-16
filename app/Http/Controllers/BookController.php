@@ -7,18 +7,19 @@ use App\Http\Requests\UpdateBookRequest;
 use App\Models\Book;
 use App\Models\Category;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class BookController extends Controller
 {
-    public function index()
+    public function index(): View
     {
         $books = Book::query()
             ->with('category')
             ->orderBy('title')
             ->paginate(10);
 
-       return view('admin.books.index', compact('books'));
+        return view('admin.books.index', compact('books'));
     }
 
     public function create(): View
@@ -27,13 +28,18 @@ class BookController extends Controller
             ->orderBy('name')
             ->get(['id', 'name']);
 
-      return view('admin.books.create', compact('categories'));
+        return view('admin.books.create', compact('categories'));
     }
 
     public function store(StoreBookRequest $request): RedirectResponse
     {
-        Book::create($request->validated());
-        
+        $data = $request->validated();
+
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('books', 'public');
+        }
+
+        Book::create($data);
 
         return redirect()
             ->route('books.index')
@@ -46,12 +52,27 @@ class BookController extends Controller
             ->orderBy('name')
             ->get(['id', 'name']);
 
-      return view('admin.books.edit', compact('book', 'categories'));
+        return view('admin.books.edit', compact('book', 'categories'));
     }
 
-    public function update(UpdateBookRequest $request, Book $book)
-    {
-        $book->update($request->validated());
+    public function update(
+        UpdateBookRequest $request,
+        Book $book
+    ): RedirectResponse {
+        $data = $request->validated();
+
+        if ($request->hasFile('image')) {
+
+            // Hapus gambar lama
+            if ($book->image) {
+                Storage::disk('public')->delete($book->image);
+            }
+
+            // Simpan gambar baru
+            $data['image'] = $request->file('image')->store('books', 'public');
+        }
+
+        $book->update($data);
 
         return redirect()
             ->route('books.index')
@@ -60,8 +81,15 @@ class BookController extends Controller
 
     public function destroy(Book $book): RedirectResponse
     {
+        // Hapus gambar ketika buku dihapus
+        if ($book->image) {
+            Storage::disk('public')->delete($book->image);
+        }
+
         $book->delete();
 
-        return redirect()->route('books.index')->with('success', 'Buku berhasil dihapus.');
+        return redirect()
+            ->route('books.index')
+            ->with('success', 'Buku berhasil dihapus.');
     }
 }
