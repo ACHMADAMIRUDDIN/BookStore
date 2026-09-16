@@ -37,7 +37,7 @@ class BookController extends Controller
 
         if ($request->hasFile('image')) {
             $data['image'] = $request->file('image')
-                ->store('book_images', 'public');
+                ->store('books', 'public');
         }
 
         Book::create($data);
@@ -78,7 +78,7 @@ class BookController extends Controller
 
     public function destroy(Book $book): RedirectResponse
     {
-        
+
         if ($book->image) {
             Storage::disk('public')->delete($book->image);
         }
