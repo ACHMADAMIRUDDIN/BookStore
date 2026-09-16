@@ -4,7 +4,6 @@ namespace App\Http\Requests;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class StoreCategoryBookRequest extends FormRequest
 {
@@ -28,7 +27,7 @@ class StoreCategoryBookRequest extends FormRequest
                 'required',
                 'string',
                 'max:255',
-                'unique:category_book,name'
+                'unique:category_book,name',
             ],
         ];
     }

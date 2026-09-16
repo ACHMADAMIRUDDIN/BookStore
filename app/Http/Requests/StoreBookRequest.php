@@ -26,7 +26,7 @@ class StoreBookRequest extends FormRequest
             'category_id' => ['required', 'integer', 'exists:category,id'],
             'title' => ['required', 'string', 'max:255'],
             'author' => ['required', 'string', 'max:255'],
-            'published_year' => ['required', 'integer', 'min:1000', 'max:'. now()->year],
+            'published_year' => ['required', 'integer', 'min:1000', 'max:'.now()->year],
             'price' => ['required', 'numeric', 'min:0'],
             'stock' => ['required', 'integer', 'min:0'],
             'description' => ['nullable', 'string'],

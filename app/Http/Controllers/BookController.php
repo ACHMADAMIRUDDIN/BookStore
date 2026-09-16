@@ -7,12 +7,12 @@ use App\Http\Requests\UpdateBookRequest;
 use App\Models\Book;
 use App\Models\Category;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class BookController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $books = Book::query()
             ->with('category')
             ->orderBy('title')
@@ -24,8 +24,8 @@ class BookController extends Controller
     public function create(): View
     {
         $categories = Category::query()
-        ->orderBy('name')
-        ->get(['id', 'name']);
+            ->orderBy('name')
+            ->get(['id', 'name']);
 
         return view('books.create', compact('categories'));
     }
@@ -42,8 +42,8 @@ class BookController extends Controller
     public function edit(Book $book): View
     {
         $categories = Category::query()
-        ->orderBy('name')
-        ->get(['id', 'name']);
+            ->orderBy('name')
+            ->get(['id', 'name']);
 
         return view('books.edit', compact('book', 'categories'));
     }

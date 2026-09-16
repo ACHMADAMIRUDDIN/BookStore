@@ -45,7 +45,7 @@ class UpdateBookRequest extends FormRequest
                 'required',
                 'integer',
                 'min:1000',
-                'max:' . now()->year,
+                'max:'.now()->year,
             ],
 
             'price' => [

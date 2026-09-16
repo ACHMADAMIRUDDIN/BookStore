@@ -6,7 +6,6 @@ use App\Http\Requests\StoreCategoryBookRequest;
 use App\Http\Requests\UpdateCategoryBookRequest;
 use App\Models\Category;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class CategoryController extends Controller
@@ -31,8 +30,8 @@ class CategoryController extends Controller
         Category::create($request->validated());
 
         return redirect()
-        ->route('categories.index')
-        ->with('success', 'Kategori berhasil ditambahkan.');
+            ->route('categories.index')
+            ->with('success', 'Kategori berhasil ditambahkan.');
     }
 
     public function edit(Category $category): View
@@ -53,10 +52,10 @@ class CategoryController extends Controller
     {
         if ($category->books()->exists()) {
             return redirect()
-            ->route('categories.index')
-            ->with('error', 'Kategori tidak dapat dihapus karena masih digunakan oleh buku.');
+                ->route('categories.index')
+                ->with('error', 'Kategori tidak dapat dihapus karena masih digunakan oleh buku.');
         }
-        
+
         $category->delete();
 
         return redirect()

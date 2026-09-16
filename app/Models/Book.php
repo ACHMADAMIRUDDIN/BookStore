@@ -19,10 +19,10 @@ class Book extends Model
     ];
 
     protected $casts = [
-        'published_year' => 'integer', 
-        'price' => 'decimal:2', 
-        'stock' => 'integer'
-        ];
+        'published_year' => 'integer',
+        'price' => 'decimal:2',
+        'stock' => 'integer',
+    ];
 
     public function category()
     {

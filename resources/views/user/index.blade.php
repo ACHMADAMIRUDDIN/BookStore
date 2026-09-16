@@ -21,10 +21,6 @@
 				<a href="#keranjang" class="text-sm font-medium text-gray-700 transition hover:text-orange-500">Keranjang</a>
 				<a href="#kontak" class="text-sm font-medium text-gray-700 transition hover:text-orange-500">Kontak</a>
 			</nav>
-			<div class="hidden items-center gap-3 md:flex">
-				<a href="{{ route('login') }}" class="rounded-xl px-5 py-2.5 text-sm font-semibold text-gray-700 transition hover:bg-gray-100">Masuk</a>
-				<a href="{{ route('register') }}" class="rounded-xl bg-amber-950 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-amber-700">Daftar Sekarang</a>
-			</div>
 		</div>
 	</header>
 <section id="buku" class="py-16 bg-gray-50">
