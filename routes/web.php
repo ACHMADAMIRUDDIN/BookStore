@@ -35,6 +35,12 @@ Route::middleware(['auth'])->group(function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/user/dashboard', [Tampilanuser::class, 'index'])->name('user.index');
+    Route::get('/user/books/{book}', [Tampilanuser::class, 'detail'])->name('user.books.detail');
+    Route::get('/user/keranjang', [Tampilanuser::class, 'keranjang'])->name('user.keranjang.index');
+    Route::post('/user/keranjang', [Tampilanuser::class, 'tambahKeranjang'])->name('user.keranjang.store');
+    Route::patch('/user/keranjang/{cart}/kurang', [Tampilanuser::class, 'kurangKeranjang'])->name('user.keranjang.kurang');
+    Route::patch('/user/keranjang/{cart}/tambah', [Tampilanuser::class, 'tambahItemKeranjang'])->name('user.keranjang.tambah');
+    Route::delete('/user/keranjang/{cart}', [Tampilanuser::class, 'hapusItemKeranjang'])->name('user.keranjang.destroy');
 });
 
 Route::middleware(['auth'])->group(function () {
