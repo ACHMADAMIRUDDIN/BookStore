@@ -192,8 +192,6 @@
                         <form action="{{ route('user.keranjang.store') }}" method="POST" class="flex items-center gap-2">
                             @csrf
                             <input type="hidden" name="book_id" value="{{ $book->id }}">
-
-                            <!-- Stepper Jumlah Buku -->
                             <div class="flex items-center border border-[#E2D8CA] rounded-xl bg-[#FAF7F2] p-1">
                                 <button type="button"
                                     onclick="if (parseInt(this.nextElementSibling.value) > 1) this.nextElementSibling.value = parseInt(this.nextElementSibling.value) - 1;"
@@ -205,7 +203,7 @@
                                     class="w-9 text-center bg-transparent border-0 p-0 text-xs font-bold text-[#382317] focus:ring-0 appearance-none select-none pointer-events-none"
                                     readonly>
                                 <button type="button"
-                                    onclick="if (parseInt(this.previousElementSibling.value) < {{ $book->stock }}) this.previousElementSibling.value = parseInt(this.previousElementSibling.value) + 1;"
+                                    onclick="let input = this.previousElementSibling; if (parseInt(input.value) < parseInt('{{ $book->stock ?? 0 }}')) { input.value = parseInt(input.value) + 1; }"
                                     class="w-7 h-7 flex items-center justify-center rounded-lg bg-white shadow-2xs text-[#382317] font-bold hover:bg-[#EADBCC] transition active:scale-95 text-sm"
                                     title="Tambah kuantitas">
                                     +
