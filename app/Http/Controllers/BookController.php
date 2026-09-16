@@ -12,14 +12,14 @@ use Illuminate\View\View;
 
 class BookController extends Controller
 {
-    public function index()
+    public function index(): View
     {
         $books = Book::query()
             ->with('category')
             ->orderBy('title')
             ->paginate(10);
 
-       return view('admin.books.index', compact('books'));
+        return view('admin.books.index', compact('books'));
     }
 
     public function create(): View
@@ -28,20 +28,14 @@ class BookController extends Controller
             ->orderBy('name')
             ->get(['id', 'name']);
 
-      return view('admin.books.create', compact('categories'));
+        return view('admin.books.create', compact('categories'));
     }
 
     public function store(StoreBookRequest $request): RedirectResponse
     {
-        $data = $request->validated();
-
-        if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')
-                ->store('books', 'public');
-        }
-
-        Book::create($data);
+        Book::create($request->validated());
         
+
         return redirect()
             ->route('books.index')
             ->with('success', 'Buku berhasil ditambahkan.');
@@ -53,23 +47,12 @@ class BookController extends Controller
             ->orderBy('name')
             ->get(['id', 'name']);
 
-      return view('admin.books.edit', compact('book', 'categories'));
+        return view('admin.books.edit', compact('book', 'categories'));
     }
 
     public function update(UpdateBookRequest $request, Book $book)
     {
-        $data = $request->validated();
-
-        if ($request->hasFile('image')) {
-            if ($book->image) {
-                Storage::disk('public')->delete($book->image);
-            }
-
-            $data['image'] = $request->file('image')
-                ->store('book_images', 'public');
-        }
-
-        $book->update($data);
+        $book->update($request->validated());
 
         return redirect()
             ->route('books.index')
@@ -78,13 +61,10 @@ class BookController extends Controller
 
     public function destroy(Book $book): RedirectResponse
     {
-
-        if ($book->image) {
-            Storage::disk('public')->delete($book->image);
-        }
-
         $book->delete();
 
-        return redirect()->route('books.index')->with('success', 'Buku berhasil dihapus.');
+        return redirect()
+            ->route('books.index')
+            ->with('success', 'Buku berhasil dihapus.');
     }
 }
