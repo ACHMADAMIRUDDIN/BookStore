@@ -1,34 +1,32 @@
-<section id="hero" class="relative overflow-hidden bg-[#4A2E1B] pt-32 pb-20 lg:pt-40 lg:pb-28">
-    <div class="mx-auto grid max-w-7xl items-center gap-12 px-6 lg:grid-cols-2 lg:gap-16 lg:px-8">
-        <div class="max-w-2xl">
-            <h1 class="text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
-                Beli Buku <span class="text-amber-700">Lebih Mudah</span> dan Terorganisir.
-            </h1>
-            <p class="mt-6 max-w-xl text-base leading-8 text-amber-50/80 sm:text-lg">
-                Persami membantu mengelola seluruh kebutuhan kegiatan secara lebih sederhana, cepat, dan terstruktur dalam satu platform digital.
-            </p>
-            <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-                <a href="{{ route('register') }}" class="inline-flex items-center justify-center gap-2 rounded-xl bg-amber-600 px-6 py-3.5 text-sm font-bold text-[#4A2E1B] transition hover:bg-amber-700">
-                    Mulai Sekarang
-                </a>
-                <a href="#fitur" class="inline-flex items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-white/10">
-                    Lihat Fitur
-                </a>
-            </div>
-            <div class="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
-                <div class="flex items-center gap-2">
-                    <span class="text-sm text-amber-50/80">Mudah digunakan</span>
-                </div>
-                <div class="flex items-center gap-2">
-                    <span class="text-sm text-amber-50/80">Terorganisir</span>
-                </div>
-                <div class="flex items-center gap-2">
-                    <span class="text-sm text-amber-50/80">Berbasis digital</span>
+<section id="hero" class="relative overflow-hidden pt-32 pb-20 lg:pt-44 lg:pb-32 border-b border-[#ECE4D8]">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
+            <div class="lg:col-span-7 space-y-6">
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold font-serif-title text-[#382317] tracking-tight leading-[1.15]">
+                    Tempat Buku Terbaik Menemukan Pembacanya.
+                </h1>
+                <p class="text-base sm:text-lg text-[#6E5A4E] leading-relaxed max-w-xl">
+                    Dari fiksi sastra yang menggugah, buku pengembangan diri, hingga literatur bisnis terkini. Kami mengkurasi bacaan bermutu agar setiap halaman membuka ruang pandang baru bagi Anda.
+                </p>
+                <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
+                    <a href="#buku" class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#382317] hover:bg-[#4E3120] text-white text-sm font-semibold shadow-xs transition active:scale-95">
+                        <span>Jelajahi Katalog Pilihan</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </a>
+                    <a href="{{ route('register') }}" class="inline-flex items-center justify-center px-6 py-3.5 rounded-xl bg-white hover:bg-[#F2ECE4] border border-[#EADBCC] text-[#382317] text-sm font-semibold shadow-2xs transition">
+                        Daftar Akun Gratis
+                    </a>
                 </div>
             </div>
-        </div>
-        <div class="relative flex justify-center lg:justify-end">
-            <img src="{{ asset('images/pngtree-scout-people-with-camp-illustration-vector-png-image_3484246-removebg-preview.png') }}" alt="Persami" class="relative z-10 w-full max-w-xl object-contain drop-shadow-2xl">
+            <div class="lg:col-span-5">
+                <div class="flex items-center justify-center">
+                    <img src="{{ asset('images/Gemini_Generated_Image_p9rsgnp9rsgnp9rs-removebg-preview.png') }}" 
+                         alt="Koleksi Buku Pilihan" 
+                         class="w-full max-w-sm sm:max-w-md lg:max-w-lg object-contain drop-shadow-[0_20px_35px_rgba(56,35,23,0.18)] select-none transition duration-500 hover:scale-105">
+                </div>
+            </div>
         </div>
     </div>
 </section>
