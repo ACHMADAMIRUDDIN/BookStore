@@ -6,24 +6,23 @@ use App\Http\Requests\StoreCategoryBookRequest;
 use App\Http\Requests\UpdateCategoryBookRequest;
 use App\Models\Category;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class CategoryController extends Controller
 {
-    public function index()
+    public function index(): View
     {
         $categories = Category::query()
             ->withCount('books')
             ->orderBy('name')
             ->paginate(10);
 
-        return view('categories.index', compact('categories'));
+        return view('admin.categories.index', compact('categories'));
     }
 
-    public function create()
+    public function create(): View
     {
-        return view('categories.create');
+        return view('admin.categories.create');
     }
 
     public function store(StoreCategoryBookRequest $request): RedirectResponse
@@ -31,17 +30,19 @@ class CategoryController extends Controller
         Category::create($request->validated());
 
         return redirect()
-        ->route('categories.index')
-        ->with('success', 'Kategori berhasil ditambahkan.');
+            ->route('categories.index')
+            ->with('success', 'Kategori berhasil ditambahkan.');
     }
 
     public function edit(Category $category): View
     {
-        return view('categories.edit', compact('category'));
+        return view('admin.categories.edit', compact('category'));
     }
 
-    public function update(UpdateCategoryBookRequest $request, Category $category): RedirectResponse
-    {
+    public function update(
+        UpdateCategoryBookRequest $request,
+        Category $category
+    ): RedirectResponse {
         $category->update($request->validated());
 
         return redirect()
@@ -53,10 +54,13 @@ class CategoryController extends Controller
     {
         if ($category->books()->exists()) {
             return redirect()
-            ->route('categories.index')
-            ->with('error', 'Kategori tidak dapat dihapus karena masih digunakan oleh buku.');
+                ->route('categories.index')
+                ->with(
+                    'error',
+                    'Kategori tidak dapat dihapus karena masih digunakan oleh buku.'
+                );
         }
-        
+
         $category->delete();
 
         return redirect()

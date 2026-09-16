@@ -18,7 +18,7 @@ class BookController extends Controller
             ->orderBy('title')
             ->paginate(10);
 
-        return view('books.index', compact('books'));
+       return view('admin.books.index', compact('books'));
     }
 
     public function create(): View
@@ -27,7 +27,7 @@ class BookController extends Controller
         ->orderBy('name')
         ->get(['id', 'name']);
 
-        return view('books.create', compact('categories'));
+      return view('admin.books.create', compact('categories'));
     }
 
     public function store(StoreBookRequest $request): RedirectResponse
@@ -45,7 +45,7 @@ class BookController extends Controller
         ->orderBy('name')
         ->get(['id', 'name']);
 
-        return view('books.edit', compact('book', 'categories'));
+      return view('admin.books.edit', compact('book', 'categories'));
     }
 
     public function update(UpdateBookRequest $request, Book $book)
